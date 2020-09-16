@@ -42,7 +42,7 @@ if(resp == "sim"):
   #gor_ind = gor_total / num_pessoas
 
 pgmt_cartao = [] #vetor com nome de quem paga no cartao
-totald = sum(v2)
+totald = valor_total
 print('\nAlguém vai pagar no cartão?')
 card = input() #variavel para criar loop d quem vai usar cartao
 
@@ -64,16 +64,19 @@ while(card == 'sim'):
 #inicializa vetores com posicoes equivalentes ao numero de pessoas
 valor = [0] * num_pessoas 
 troco = [0] * num_pessoas
-troco_total = totald - sum(valor) #totald de gastos menos o totald de dinheiro
+
 print("")
 for i in range(num_pessoas): #i = indice
+  v2[i] += v2[i] * gor_perc
   #se a pessoa nao for pagar em cartao entao  
   if(v1[i] not in pgmt_cartao): 
     valor[i] = float(input("Quanto {} vai dar em dinheiro?".format(v1[i])))
-    v2[i] += v2[i] * gor_perc
     troco[i] = valor[i] - v2[i]   
+    troco_total = sum(troco)  
+
 
 print("\n\nValor total:", valor_total)
+print("Troco total:", troco_total)
 for i in range(num_pessoas):
   print("{}: deve pagar {} e receber {} de troco.".format(v1[i], v2[i], troco[i]))
 
@@ -84,3 +87,9 @@ for i in range(num_pessoas):
 #print("gor_total", gor_total)    
 #print("troco totald", troco_total)
 #print("troco indi", troco)
+
+
+
+
+    
+
