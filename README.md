@@ -1,6 +1,11 @@
-# MesaDeBar
-Projeto X - LP2<br/>
-**IFB**
+<div align="center">
+	<img src="logo/logo_pqn.png" width="256"/>
+	<h1>Mesa De Bar</h1>
+</div>
+
+Projeto X - LP2
+<br>
+<b>IFB</b>
 	<h3>Sobre o Site:</h3>
 <p>
 	O site é uma iniciativa de universitários que depois das aulas iam nos barzinhos e perceberam a dificuldade em calcular os valores de pagamento, troco e gorjeta para cada um, baseado em quanto foi dado inicialmente. 
@@ -9,7 +14,7 @@ Projeto X - LP2<br/>
 	Então o projeto mesa de bar ajuda as pessoas a dividir as despesas em algum restaurante, bar, ou afins. 
 </p>
 <h3>O sistema fornece 3 opções da divisão da conta: </h3>
-<p>Normal: Cada pessoa vai pagar a quantia que gastou.</p>
-<p>Igual: As pessoas vão dividir a conta igualmente.</p>
-<p>Parcial: Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.</p>
+<p><b>Normal:</b> Cada pessoa vai pagar a quantia que gastou.</p>
+<p><b>Igual:</b> As pessoas vão dividir a conta igualmente.</p>
+<p><b>Parcial:</b> Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.</p>
 
