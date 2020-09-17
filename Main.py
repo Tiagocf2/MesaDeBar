@@ -1,91 +1,78 @@
-v1=[] #vetor1 para nome d quem ta pagando
-f=0   #variável pra finalizar loop
-num_pessoas = 0
+PGMT_DINHEIRO = 0 #constante do pagamento em dinheiro
+PGMT_CARTAO   = 1 #constante do pagamento em cartao
+valor_total = 0  #valor total da conta
+troco_total = 0  #valor do troco da conta
+num_pessoas = 0  #numero total de pessoas
+gor_perc = 0     #percentual de gorjeta
+pessoas = []     #vetor para armazenar as pessoas
+pessoa_model = { #modelo para uma pessoa
+    "nome":"",
+    "pgmt":PGMT_DINHEIRO,
+    "gasto":0,
+    "valor":0,
+    "troco":0
+}
+
+
 #Loop para adicionar as pessoas
+f=0   #variável pra finalizar loop
 while(f == 0):
-    n = input('Quem vai pagar? ') 
-    n = str(n)                   
+    nome = input('Quem vai pagar? ').capitalize()
+    p = pessoa_model.copy()
+    p["nome"] = nome                  
+    pessoas.append(p)              
     num_pessoas += 1
-    v1.append(n)                 
 
-    m = input('Mais alguém? ')   
-    m = str(m)                    
-
+    m = input('Mais alguém? ')                     
     #se for adicionar mais pessoas o loop continua, senao para
-    if(m == 'sim'): 
-        f = 0                    
-    else:
-        f=1                      
-        x = v1.copy()          
-
-v2=[]       #vetor para os gastos
-v3=[v1,v2]  #vetor para atrelas os nomes e gastos
-#enquanto houver elementos em v1 o loop se repete 
+    if(m.lower() != 'sim'): 
+        f = 1                              
+ 
 print("")
-while(len(v1) > 0):  
-    d = float(input('Quanto '+ v1[0] + ' gastou?')) 
-    v2.append(d)     #adiciona o valor pago
-    v1.remove(v1[0]) #remove o primeiro item da lista
+for p in pessoas:
+    val = float(input('Quanto '+ p["nome"] + ' gastou?')) 
+    p["gasto"] = val     #adiciona o valor pago
+    valor_total += val
 
-
-v1 = x               #restaura os itens q foram removidos do v1
-v3 = [v1,v2]         #acho q declarei dnv sem querer
-
-     #variavel q guarda o valor total a ser pago
-valor_total = sum(v2)
 resp = input("\nTem gorjeta? ")
-gor_perc = 0
 if(resp == "sim"):
   gor_perc = int(input("Qual o valor (%)? ")) / 100
-  valor_total += valor_total * gor_perc
+  valor_total += valor_total * gor_perc #adiciona o valor da gorjeta no total
 
-  #gor_ind = gor_total / num_pessoas
+total_card = valor_total
+resp = input('\nAlguém vai pagar no cartão?').lower()
 
-pgmt_cartao = [] #vetor com nome de quem paga no cartao
-totald = valor_total
-print('\nAlguém vai pagar no cartão?')
-card = input() #variavel para criar loop d quem vai usar cartao
-
-while(card == 'sim'):
-
-    ncard = input('Nome:') #salva o nome d quem vai pagar no cartao
-    matriz = v1.index(ncard) 
-
-    if(matriz == -1):
-      print("Nome nao existe")
-      continue #pula o resto do codigo
-
-    totald -= v3[1][matriz] #subtrai do valor total o item presente na coordenada [1][?] de v3
-    pgmt_cartao.append(v1[matriz])
-
-    print('Mais alguém?')
-    card = input()         #reinicia ou encerra o loop
-
-#inicializa vetores com posicoes equivalentes ao numero de pessoas
-valor = [0] * num_pessoas 
-troco = [0] * num_pessoas
+if(resp == 'sim'):
+    for i in range(num_pessoas):
+        print("{}. {}".format(i+1, pessoas[i]["nome"]))
+    while(resp == 'sim'):
+        resp = int(input("Quem? "))
+        pessoas[resp-1]["pgmt"] = PGMT_CARTAO
+        #subtrai do valor total o gasto da pessoa escolhida
+        total_card -= pessoas[resp-1]["gasto"] 
+        resp = input('Mais alguém?')
 
 print("")
-for i in range(num_pessoas): #i = indice
-  v2[i] += v2[i] * gor_perc
+for p in pessoas:
+  p["gasto"] += p["gasto"] * gor_perc #adiciona a gorjeta nos gastos de cada um
   #se a pessoa nao for pagar em cartao entao  
-  if(v1[i] not in pgmt_cartao): 
-    valor[i] = float(input("Quanto {} vai dar em dinheiro?".format(v1[i])))
-    troco[i] = valor[i] - v2[i]   
-    troco_total = sum(troco)  
+  if(p["pgmt"] == PGMT_DINHEIRO): 
+    p["valor"] = float(input("Quanto {} vai dar em dinheiro?".format(p["nome"])))
+    p["troco"] = p["valor"] - p["gasto"]   
+    troco_total += p["troco"] 
 
 
 print("\n\nValor total:", valor_total)
 print("Troco total:", troco_total)
-for i in range(num_pessoas):
-  print("{}: deve pagar {} e receber {} de troco.".format(v1[i], v2[i], troco[i]))
+for p in pessoas:
+  print("{}: deve pagar {} e receber {} de troco.".format(p["nome"], p["gasto"], p["troco"]))
 
 #print("\n\nPessoas:\n{}\n{}".format(v1,v2))
 #print("print pgmt:", pgmt_cartao)
 #print(valor," valor")
 #print("gor_pec", gor_perc)
 #print("gor_total", gor_total)    
-#print("troco totald", troco_total)
+#print("troco total_card", troco_total)
 #print("troco indi", troco)
 
 
