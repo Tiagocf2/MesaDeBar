@@ -1,0 +1,36 @@
+*
+{
+	margin:0;
+	padding:0; 
+	font-family: "Inter", sans-serif; /*fonte de todo o texto dentro do site*/
+}
+:root
+{
+	--main-radius:3px; /*variável "global ??? para borda*/
+	--main-padding:3px; /*variável "global ???" para padding*/
+}
+.class
+{
+	display:grid; /*sistema de grade - 2D (linhas e colunas)*/
+	grid-template-columns:1fr 1fr 1fr; /*3 colunas, columns: colunas*/
+	grid-template-rows:1fr 2fr 0.5fr; /*3 linhas, rows:linhas*/
+	grid-template-areas: /*o que ficará nas areas e sua ordem*/
+	"menu menu menu"
+	"hist trab trab trab"
+	"footer footer footer";
+	grid-gap:0.2rem; /*espaço entre linhas e colunas, também pode usar só pra linhas ou colunas e usa: grid-columns ou rows-gap*/	
+}
+/*L o g o*/
+/*M e n u*/
+/*H i s t ó r i a */
+/*T r a b a l h o*/
+/*D e s e n v o l v e d o r e s*/
+footer
+{
+	height: 30px;
+	width:100%;
+	background-color:#E6BEAE;
+	grid-area:footer; /*lembra do "grid-template-areas"? Então...esse é o nome que fica lá*/
+	border-radius:var(--main-radius); /*aplicando as variáveis*/
+	padding-top:var(--main-padding);
+}
