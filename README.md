@@ -1,11 +1,9 @@
 <div align="center">
 	<img src="logo/logo_pqn.png" width="165"/>
 	<h1>Mesa De Bar</h1>
+	<h5>Projeto X - LP2</h5>
+	<h5><b>IFB</b></h5>
 </div>
-
-Projeto X - LP2
-<br>
-<b>IFB</b>
 	<h3>Sobre o Site:</h3>
 <p>
 	O site é uma iniciativa de universitários que depois das aulas iam nos barzinhos e perceberam a dificuldade em calcular os valores de pagamento, troco e gorjeta para cada um, baseado em quanto foi dado inicialmente. 
