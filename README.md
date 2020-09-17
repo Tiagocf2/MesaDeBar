@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="logo/logo_pqn.png" width="256"/>
+	<img src="logo/logo_pqn.png" width="165"/>
 	<h1>Mesa De Bar</h1>
 </div>
 
