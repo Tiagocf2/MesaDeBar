@@ -1,36 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900%display=swap');
 *
 {
 	margin:0;
-	padding:0; 
-	font-family: "Inter", sans-serif; /*fonte de todo o texto dentro do site*/
+	padding:0;
+	box-sizing: border-box;
+	font-family: 'Poppins',sans-serif;
+
 }
-:root
+body
 {
-	--main-radius:3px; /*variável "global ??? para borda*/
-	--main-padding:3px; /*variável "global ???" para padding*/
-}
-.class
+	background: #000;
+	min-height: 100vh;
+
+} 
+header 
 {
-	display:grid; /*sistema de grade - 2D (linhas e colunas)*/
-	grid-template-columns:1fr 1fr 1fr; /*3 colunas, columns: colunas*/
-	grid-template-rows:1fr 2fr 0.5fr; /*3 linhas, rows:linhas*/
-	grid-template-areas: /*o que ficará nas areas e sua ordem*/
-	"menu menu menu"
-	"hist trab trab trab"
-	"footer footer footer";
-	grid-gap:0.2rem; /*espaço entre linhas e colunas, também pode usar só pra linhas ou colunas e usa: grid-columns ou rows-gap*/	
-}
-/*L o g o*/
-/*M e n u*/
-/*H i s t ó r i a */
-/*T r a b a l h o*/
-/*D e s e n v o l v e d o r e s*/
-footer
-{
-	height: 30px;
+	position: relative;
+	top:0;
+	left:0;
 	width:100%;
-	background-color:#E6BEAE;
-	grid-area:footer; /*lembra do "grid-template-areas"? Então...esse é o nome que fica lá*/
-	border-radius:var(--main-radius); /*aplicando as variáveis*/
-	padding-top:var(--main-padding);
+	display:flex;
+	justify-content:space-between; 
+	align-items:center;
+	transition:0.6s;
+	padding:20px 30px;
+	z-index:100000;
+	background-color: #fff;
+}
+header .logo
+{
+	position:relative;
+	font-weight:700;
+	color:#fff;
+	text-decoration:none;
+	font-size:2em;
+	text-transform:uppercase;
+	letter-spacing: 2px;
+	transition:0.6s;
+	text-shadow: 0.1em 0.1em 0.2em #000; 
+}
+header ul
+{
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+header ul li
+{
+	position: relative;
+	list-style:none;
+}
+header ul li a
+{
+	position:relative;
+	margin:0 15px;
+	text-decoration:none;
+	color:#000;
+	letter-spacing: 2px;
+	font-weight:500;
+	transition:0.6s;
+}
+.imagem
+{
+	background:url(img/fundo2.jpg);
+	background-attachment: fixed;
+	height: 100%;
+}
+h1
+{
+	color:#fff;
+	letter-spacing: 20px;
+	text-shadow: 0.1em 0.1em #000;
+	text-transform: uppercase;
+}
+p
+{
+	color:#fff;
+	text-shadow: 0.1em 0.1em #000;
+}
+#sobre
+{
+	padding:70px;
+	width: 100%;
+	height: 250px;
+}
+#projeto
+{
+	background:#b76935;	
+	width: 100%;
+	height: 250px;
+}
+footer
+{ 
+	padding: 5px;
+	color: #fff;
+	text-shadow: 0.1em 0.1em #000;
+}
+
+footer a
+{
+	color:#fff;
+	text-decoration: none;
 }
