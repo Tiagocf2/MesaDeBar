@@ -13,6 +13,18 @@ body
 	min-height: 100vh;
 
 } 
+.container 
+{
+	display:grid;
+	height:100vh;
+	grid-template-columns:1fr;
+	grid-template-rows:0.2fr 1.5fr 1.2fr 0.6fr;
+	grid-template-areas:
+	"menu"
+	"projeto"
+	"sobre"
+	"footer";
+}
 header 
 {
 	position: fixed;
@@ -29,6 +41,7 @@ header
 	background-image: url(img/giz.jpg);
 	background-size: 100%;
 	background-repeat: no-repeat;
+	grid-area: menu;
 }
 header .logo
 {
@@ -85,19 +98,22 @@ p
 	background: url(img/fundo3.png);
 	background-attachment:fixed;	
 	width: 100%;
-	height: 500px;	
+	height: 500px;
+	grid-area: projeto;	
 }
 #sobre
 {
 	padding:70px;
 	width: 100%;
 	background:#b76935;	
+	grid-area:sobre;
 }
 footer
 { 
 	padding: 5px;
 	background-color: #fff;
 	transition: 0.6s;
+	grid-area: footer;
 }
 footer a
 {
@@ -113,4 +129,16 @@ footer p
 {
 	color:black;
 	text-shadow: none;
+}
+
+@media only screen and (max-width: 550px;){
+	.container{
+		grid-template-columns:1fr;
+		grid-template-rows:0.2fr 1.5fr 1.2fr 0.6fr;
+		grid-template-areas:
+		"menu"
+		"projeto"
+		"sobre"
+		"footer";
+	}
 }
