@@ -97,9 +97,20 @@ footer
 { 
 	padding: 5px;
 	background-color: #fff;
+	transition: 0.6s;
 }
 footer a
 {
 	color:#000;
 	text-decoration: none;
+	transition: 0.6s;
+}
+footer a:hover
+{
+	color:#b76935;
+}
+footer p
+{
+	color:black;
+	text-shadow: none;
 }
