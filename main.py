@@ -96,20 +96,21 @@ def definir_gastos(div):
 
 	elif(div == DIVISAO_PARCIAL):
 		grupos =[]
-		grupodiv = {
-			"nome":"",
-			"pessoas":[],
-			"valor":0
-		}
 
 		for p in pessoas:
 			val = float(input('Quanto '+ p["nome"] + ' gastou individualmente?')) 
-			p["gasto"] = val     #adiciona o valor pago
+			p["gasto"] += val     #adiciona o valor pago
 			valor_total += val
 
 		while(True):
+			grupodiv = {
+			"nome":"",
+			"pessoas":[],
+			"valor":0
+			}
+		
 			nomeg = input(('O que será dividido?'))
-
+			grupodiv["nome"] = nomeg
 			while(True):
 					grupo = input('Quem vai dividir o valor de:'+ nomeg + '?').capitalize()
 					grupodiv["pessoas"].append(grupo) 
@@ -120,12 +121,12 @@ def definir_gastos(div):
 				
 				
 			val_col = float(input('Qual o valor de: '+ nomeg + '?'))
+			grupodiv["valor"] = val_col
 			valor_total += val_col
 			val_div = val_col / len(grupodiv["pessoas"])
 
 			for nome in grupodiv["pessoas"]:
 				for p in pessoas:
-					print(p["nome"],nome)
 					if(p["nome"] == nome):
 						p["gasto"] += val_div
 
@@ -155,16 +156,17 @@ def definir_valores():
 		p["gasto"] += p["gasto"] * gor_perc #adiciona a gorjeta nos gastos de cada um
 		#se o metodo de pagamento da pessoa for dinheiro, entao  
 		if(p["pgmt"] == PGMT_DINHEIRO): 
+			print("{} deverá pagar: {:.2f}.".format(p["nome"], p["gasto"]))
 			p["valor"] = float(input("Quanto {} vai dar em dinheiro?".format(p["nome"])))
 			p["troco"] = p["valor"] - p["gasto"]
 			troco_total += p["troco"] 
 
 def exibir_resultados():
 	'''Exibe o resultado final da conta'''
-	print("Valor total:", valor_total)
-	print("Troco total:", troco_total)
+	print("Valor total: {:.2f}".format(valor_total))
+	print("Troco total: {:.2f}".format(troco_total))
 	for p in pessoas:
-		print("{}: deve pagar {} e receber {} de troco.".format(p["nome"], p["gasto"], p["troco"]))
+		print("{}: deve pagar {:.2f} e receber {:.2f} de troco.".format(p["nome"], p["gasto"], p["troco"]))
 
 if(__name__ == "__main__"):
 	main()
