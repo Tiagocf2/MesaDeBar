@@ -10,11 +10,11 @@ num_pessoas = 0  #numero total de pessoas
 gor_perc = 0     #percentual de gorjeta
 pessoas = []     #vetor para armazenar as pessoas
 pessoa_model = { #modelo para uma pessoa
-	"nome":"",
-	"pgmt":PGMT_DINHEIRO,
-	"gasto":0,
-	"valor":0,
-	"troco":0
+"nome":"",
+"pgmt":PGMT_DINHEIRO,
+"gasto":0,
+"valor":0,
+"troco":0
 }
 
 def main():
@@ -80,7 +80,7 @@ def definir_gastos(div):
 	'''Define os gastos de cada pessoa levando em conta o tipo de divisão escolhido'''
 	global valor_total
 	global num_pessoas
-	if   (div == DIVISAO_NORMAL):
+	if    (div == DIVISAO_NORMAL):
 	#loop se repete de acordo com o tamanho do vetor "pessoas"
 	#armazenando o valor de cada elemento na variavel "p" a cada ciclo
 		for p in pessoas:
@@ -88,14 +88,53 @@ def definir_gastos(div):
 			p["gasto"] = val     #adiciona o valor pago
 			valor_total += val
 
-	elif (div == DIVISAO_IGUAL):
+	elif  (div == DIVISAO_IGUAL):
 		valor_total = float(input("Quanto foi o valor da conta? "))
 		v_indiv = valor_total/num_pessoas #divide o valor total igualmente
 		for p in pessoas:
 			p["gasto"] += v_indiv   #adiciona os valores individuais custo de cada pessoa
 
-	elif (div == DIVISAO_PARCIAL):
-		pass
+	elif(div == DIVISAO_PARCIAL):
+		grupos =[]
+		grupodiv = {
+			"nome":"",
+			"pessoas":[],
+			"valor":0
+		}
+
+		for p in pessoas:
+			val = float(input('Quanto '+ p["nome"] + ' gastou individualmente?')) 
+			p["gasto"] = val     #adiciona o valor pago
+			valor_total += val
+
+		while(True):
+			nomeg = input(('O que será dividido?'))
+
+			while(True):
+					grupo = input('Quem vai dividir o valor de:'+ nomeg + '?').capitalize()
+					grupodiv["pessoas"].append(grupo) 
+					
+					resp = input('Mais alguém? ').lower()
+					if(resp != 'sim'):
+						break;
+				
+				
+			val_col = float(input('Qual o valor de: '+ nomeg + '?'))
+			valor_total += val_col
+			val_div = val_col / len(grupodiv["pessoas"])
+
+			for nome in grupodiv["pessoas"]:
+				for p in pessoas:
+					print(p["nome"],nome)
+					if(p["nome"] == nome):
+						p["gasto"] += val_div
+
+
+			grupos.append(grupodiv.copy())
+
+			resp2 = input('Mais algo será dividido? ').lower()
+			if(resp2 != 'sim'):
+				break;
 
 def definir_pagamentos():
 	'''Define o pagamento em cartão para as pessoas escolhidas'''
