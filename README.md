@@ -15,4 +15,7 @@
 <p><b>Normal:</b> Cada pessoa vai pagar a quantia que gastou.</p>
 <p><b>Igual:</b> As pessoas vão dividir a conta igualmente.</p>
 <p><b>Parcial:</b> Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.</p>
+<hr>
+<h6>O Instituto Federal de Educação, Ciência e Tecnologia de Brasília - Tecnologia em Sistemas para Internet</h6>
+<h6> TSIV2A - Linguagem de Programação 2 - Prof. Kadidja - 2020</h6>
 
