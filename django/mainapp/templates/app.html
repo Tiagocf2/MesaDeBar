@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,52 +6,23 @@
 </head>
 <body bgcolor="white">
 	<h1>Quem vai dividir a conta?</h1>
-	<form method='POST' action="{% url 'app' %}">
+	<form method='POST' action="{% url 'app-1' %}">
 		{% csrf_token %}
 		<p>Adicionar pessoa:</p>
 		<input type="text" name="add_nome"/>
 		<button type="button" onclick="add(this)">+</button>
 		<ul id="lista" name="lista"></ul>
 
-		<label>Normal:&nbsp;<input type="radio" name="divisao"/></label>
-		<label>Igual:&nbsp;<input type="radio" name="divisao"/></label>
-		<label>Parcial:&nbsp;<input type="radio" name="divisao"/></label>
+		<label>Normal:&nbsp;<input type="radio" name="divisao" value='0'/></label>
+		<label>Igual:&nbsp;<input type="radio" name="divisao" value='1'/></label>
+		<label>Parcial:&nbsp;<input type="radio" name="divisao" value='2'/></label>
 
 		<input type='submit' value='Enviar'>
 	</form>
-	{% for n in nome %}
-		<p>{{n}}</p>
+	<p>{{div}}</p>
+	{% for p in pessoas %}
+		<p>Nome: {{p.nome}}</p>
 	{% endfor %}
-	<script language="javascript">
-		var nomes = [];
-
-		function add(self){
-			parent = self.parentNode
-			var value = parent.add_nome.value
-			var data = document.createElement("input");
-			var view = document.createElement("li");
-			var btn = document.createElement("button");
-			data.setAttribute("type", "hidden");
-			data.setAttribute("name", "nome");
-			data.setAttribute("value", value);
-			view.innerHTML = value;
-			btn.setAttribute("type", "button");
-			btn.innerHTML = "-";
-			btn.addEventListener("click", function(){
-				remove(view, btn, data);
-			});
-
-			parent.appendChild(data);
-			parent.children.namedItem("lista").appendChild(view);
-			parent.children.namedItem("lista").appendChild(btn);
-			nomes.push(value);
-		}
-
-		function remove(view, btn, data){
-				view.remove();
-				data.remove();
-				btn.remove();
-		}
-	</script>
+	<script type="text/javascript" src="{% static 'js/app.js'%}"></script>
 </body>
 </html>
