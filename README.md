@@ -16,8 +16,8 @@
 <p><b>Igual:</b> As pessoas vão dividir a conta igualmente.</p>
 <p><b>Parcial:</b> Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.</p>
 <br>
-<kbd align='center'>
+<div align='center'>
 	<h6>Instituto Federal de Educação, Ciência e Tecnologia de Brasília - Tecnologia em Sistemas para Internet</h6>
 	<h6> TSIV2A - Linguagem de Programação 2 - Prof. Kadidja - 2020</h6>
-</kbd>
+</div>
 
