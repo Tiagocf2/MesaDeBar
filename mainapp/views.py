@@ -9,5 +9,5 @@ def index(request):
 
 def app(request):
 	template = loader.get_template('app.html')
-	context = {"teste":1}
+	context = request.POST
 	return HttpResponse(template.render(context, request))

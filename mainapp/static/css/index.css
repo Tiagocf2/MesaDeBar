@@ -38,7 +38,7 @@ header
 	padding:20px 30px;
 	z-index:100000;
 	/*background-color: #fff;*/
-	background-image: url(img/giz.jpg);
+	background-image: url('/static/img/giz.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 	grid-area: menu;
@@ -95,12 +95,21 @@ p
 }
 #projeto
 {
-	background: url(img/fundo3.png);
+	background: url('/static/img/fundo3.png');
 	background-attachment:fixed;	
 	width: 100%;
 	height: 500px;
-	grid-area: projeto;	
+	grid-area: projeto;
+
+	padding: 7%;
 }
+
+#projeto embed
+{
+	width: 100%;
+	height: 100%;
+}
+
 #sobre
 {
 	padding:70px;
