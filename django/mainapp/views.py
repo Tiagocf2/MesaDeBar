@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
+from django.urls import reverse
+from urllib.parse import urlencode
 # Create your views here.
 
 """VARIAVEIS GLOBAIS"""
@@ -26,27 +28,44 @@ def index(request):
 	return HttpResponse(template.render(context, request))
 
 def app(request):
-	template = loader.get_template('app.html')
+	template = loader.get_template('app-ini.html')
 	context = {};
 	return HttpResponse(template.render(context, request))
 
-def app_1(request):
+def app_error(request):
+	template = loader.get_template('app-error.html')
+	context = {"msg":request.GET.get("msg")}
+	return HttpResponse(template.render(context, request))
+
+def app_gsto(request):
 	'''Processa os nomes das pessoas e o tipo de divisao'''
 	global tipo_divisao
 	global pessoas
 	#QueryDict retorna so o ultimo valor de uma chave entao precisa de '.getList()' pra pegar todos os valores
 	for nome in request.POST.getlist("nome"):
-		print(adicionar_pessoa(nome.capitalize()))
+		adicionar_pessoa(nome.capitalize())
 
-	tipo_divisao = definir_tipo_divisao(int(request.POST["divisao"]))
-	if(tipo_divisao == None):
-		pass #NSEI COMO FAZ ERRO
+	if("divisao" in request.POST):
+		tipo_divisao = definir_tipo_divisao(int(request.POST["divisao"]))
+		if(tipo_divisao == None):
+			msg = "Tipo de divisão inválido"
+			return throw_error(msg)
+			
+	else:
+		msg = "Tipo de divisão não especificado"
+		return throw_error(msg)
 
-	template = loader.get_template('app.html')
+	template = loader.get_template('app-gsto.html')
 	context = {"div":tipo_divisao, "pessoas":pessoas}
 	return HttpResponse(template.render(context, request))
 
 """OUTRAS FUNCOES"""
+def throw_error(msg):
+	base_url = reverse('app-error')
+	get_args = urlencode({"msg":msg})
+	url = "{}?{}".format(base_url, get_args);
+	return redirect(url);
+
 def adicionar_pessoa(nome):
 	'''Adiciona uma pessoa à conta'''
 	p = pessoa_model.copy()

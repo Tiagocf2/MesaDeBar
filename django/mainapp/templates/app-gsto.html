@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App - Definir Gastos</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+</head>
+<body bgcolor="white">
+	<h1>Divisão {{div}}</h1>
+	{% for p in pessoas %}
+		<p>Nome: {{p.nome}}</p>
+	{% endfor %}
+	<script type="text/javascript" src="{% static 'js/app-gsto.js' %}"></script>
+</body>
+</html>

@@ -6,23 +6,20 @@
 </head>
 <body bgcolor="white">
 	<h1>Quem vai dividir a conta?</h1>
-	<form method='POST' action="{% url 'app-1' %}">
+	<span id="msg"></span>
+	<form id="form" method='POST' action="{% url 'app-gsto' %}">
 		{% csrf_token %}
 		<p>Adicionar pessoa:</p>
 		<input type="text" name="add_nome"/>
 		<button type="button" onclick="add(this)">+</button>
 		<ul id="lista" name="lista"></ul>
 
-		<label>Normal:&nbsp;<input type="radio" name="divisao" value='0'/></label>
+		<label>Normal:&nbsp;<input type="radio" name="divisao" value='0' checked/></label>
 		<label>Igual:&nbsp;<input type="radio" name="divisao" value='1'/></label>
 		<label>Parcial:&nbsp;<input type="radio" name="divisao" value='2'/></label>
 
 		<input type='submit' value='Enviar'>
 	</form>
-	<p>{{div}}</p>
-	{% for p in pessoas %}
-		<p>Nome: {{p.nome}}</p>
-	{% endfor %}
-	<script type="text/javascript" src="{% static 'js/app.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/app-ini.js'%}"></script>
 </body>
 </html>

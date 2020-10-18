@@ -1,13 +1,23 @@
 var nomes = [];
+var form = document.getElementById('form');
+var msg = document.getElementById('msg');
+form.onsubmit = isValidForm;
+
+checkValidType();
 
 function add(self){
 	var parent = self.parentNode;
-
 	while(parent.nodeName != "FORM"){
 		parent = parent.parentNode;
 	}
 
 	var value = parent.add_nome.value
+	if(value == ''){
+		msg.innerHTML = "Por favor especifique um nome antes de adicionar a pessoa.";
+		return;
+	}
+
+
 	var data = document.createElement("input");
 	var view = document.createElement("li");
 	var btn = document.createElement("button");
@@ -34,12 +44,16 @@ function add(self){
 	parent.children.namedItem("lista").appendChild(view);
 	parent.children.namedItem("lista").appendChild(btn);
 	nomes.push(value);
+	checkValidType();
 }
 
 function remove(view, btn, data){
-		view.remove();
-		data.remove();
-		btn.remove();
+	var index = nomes.indexOf(data.value);
+	nomes.splice(index, 1);
+	view.remove();
+	data.remove();
+	btn.remove();
+	checkValidType();
 }
 
 function parse_duplicate_entry(value){
@@ -52,4 +66,23 @@ function parse_duplicate_entry(value){
 		value += " (2)";
 	}
 	return value;
+}
+
+function isValidForm(){
+	if(nomes.length <= 0){
+		msg.innerHTML = "Adicione ao menos UMA pessoa para continuar.";
+		return false;
+	}
+	return true;
+}
+
+function checkValidType(){
+	if(nomes.length <= 1){
+		form.divisao[0].checked = true;
+		form.divisao[1].disabled = true;
+		form.divisao[2].disabled = true;
+	} else {
+		form.divisao[1].disabled = false;
+		form.divisao[2].disabled = false;
+	}
 }
