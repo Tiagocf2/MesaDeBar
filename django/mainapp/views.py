@@ -94,12 +94,12 @@ def app_pgmt(request):
 	if (tipo_divisao == DIVISAO_NORMAL):
 		gastos = request.POST.getlist("gasto")
 		for i in range(0, len(pessoas)):
-			gastos[i] = round(float(gastos[i]),2)
+			gastos[i] = float(gastos[i])
 			pessoas[i]["gasto"] = gastos[i]
 			valor_total += gastos[i]
 
 	elif (tipo_divisao == DIVISAO_IGUAL):
-		gasto = round(float(request.POST["gasto"]),2)
+		gasto = float(request.POST["gasto"])
 		valor_total = gasto
 		valor_indv = round(valor_total/len(pessoas),2)
 		for p in pessoas:
@@ -108,14 +108,14 @@ def app_pgmt(request):
 	elif (tipo_divisao == DIVISAO_PARCIAL):
 		gastos = request.POST.getlist("gasto")
 		for i in range(0, len(pessoas)):
-			gastos[i] = round(float(gastos[i]),2)
+			gastos[i] = float(gastos[i])
 			pessoas[i]["gasto"] = gastos[i]
 			valor_total += gastos[i]
 		g_nomes = request.POST.getlist("grupo-nome")
 		g_valores = request.POST.getlist("grupo-valor")
 		g_pessoas = request.POST.getlist("grupo-pessoa")
 		for i in range(len(g_nomes)):
-			valor = round(float(g_valores[i]),2)
+			valor = float(g_valores[i])
 			membros = g_pessoas[i].split(",")
 			grupo = grupo_model.copy()
 			grupo["nome"] = g_nomes[i]
@@ -130,7 +130,7 @@ def app_pgmt(request):
 						p["gasto"] += valor_indv
 
 	if(temGorjeta):
-		gor_perc = round(float(request.POST["gorjeta"]),2)/100
+		gor_perc = float(request.POST["gorjeta"])/100
 		valor_total += valor_total * gor_perc
 		for p in pessoas:
 			p["gasto"] += p["gasto"] * gor_perc
@@ -161,7 +161,7 @@ def app_rslt(request):
 			pessoas[i]["pgmt"] = PGMT_DINHEIRO
 
 		if(pessoas[i]["pgmt"] == PGMT_DINHEIRO):
-			pessoas[i]["valor"] = round(float(valores[i]),2)
+			pessoas[i]["valor"] = float(valores[i])
 			troco = pessoas[i]["valor"] - pessoas[i]["gasto"]
 			pessoas[i]["troco"] = troco
 			troco_total += troco
