@@ -19,20 +19,22 @@
 				</ul>	
 		</header>
 		<div id="projeto">
-			<embed src="{% url 'app' %}"></embed>
+			<embed src="{% url 'app' %}" id="embed"></embed>
 		</div>
 		<div id="sobre">
 			<h1>Sobre</h1>
+			<br>
 				<p align="justify">O site é uma iniciativa de universitários que depois das aulas iam nos barzinhos e perceberam a dificuldade em calcular os valores de pagamento, troco e gorjeta para cada um, baseado em quanto foi dado inicialmente.
 					Então o projeto mesa de bar ajuda as pessoas a dividir as despesas em algum restaurante, bar, ou afins.
 					<br>
-					<strong>O sistema fornece 3 opções da divisão da conta:</strong>
 					<br>
-					<strong>Normal:</strong> Cada pessoa vai pagar a quantia que gastou.
+					<p id="opc_div">O sistema fornece 3 opções da divisão da conta:</p>
 					<br>
-					<strong>Igual:</strong> As pessoas vão dividir a conta igualmente.
+					<strong>Normal: </strong>  Cada pessoa vai pagar a quantia que gastou.
 					<br>
-					<strong>Parcial:</strong> Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.
+					<strong>Igual: </strong>  As pessoas vão dividir a conta igualmente.
+					<br>
+					<strong>Parcial: </strong>  Uma mescla da divisão normal e da igual. As pessoas ora vão pagar sua parte separada, ora igualmente.
 				</p>
 		</div>
 		<footer id="contato" align="center">
