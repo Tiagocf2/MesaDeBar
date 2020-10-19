@@ -1,7 +1,5 @@
-var nomes = [];
-var form = document.getElementById('form');
-var msg = document.getElementById('msg');
 form.onsubmit = isValidForm;
+var nomes = [];
 
 checkValidType();
 
@@ -12,15 +10,24 @@ function add(self){
 	}
 
 	var value = parent.add_nome.value
+
+	//Remove espacos no comeco e no final do nome
+	while(true){
+		if(value[0] == ' '){
+			value = value.substr(1,value.length);
+		}else if(value[value.length-1] == ' '){
+			value = value.substr(0,value.length-2);
+		} else {
+			break;
+		}
+	}
+
 	if(value == ''){
 		msg.innerHTML = "Por favor especifique um nome antes de adicionar a pessoa.";
 		return;
 	}
-
-
-	var data = document.createElement("input");
-	var view = document.createElement("li");
-	var btn = document.createElement("button");
+	//Capitaliza a primeira letra
+	value = value.charAt(0).toUpperCase() + value.slice(1);
 
 	while(nomes.length > 0){
 		if(nomes.find(function(v){return v == value})){
@@ -29,6 +36,10 @@ function add(self){
 			break;
 		}
 	}
+
+	var data = document.createElement("input");
+	var view = document.createElement("li");
+	var btn = document.createElement("button");
 
 	data.setAttribute("type", "hidden");
 	data.setAttribute("name", "nome");

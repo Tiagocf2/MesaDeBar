@@ -1,9 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>App - Pagamento</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
 </head>
 <body bgcolor="white">
-	<h1>Paga ai po</h1>
+	<h1>Pagamento</h1>
+	<p>Quanto cada pessoa vai dar em dinheiro?</p>
+	<form id="form" method="POST" action="{% url 'app-rslt'%}">
+		{% csrf_token %}
+		<ul>
+		{% for p in pessoas %}
+			<li>
+				<span>{{p.nome}}</span>
+				<span>R${{p.gasto}}</span>
+				<label>
+					<span>Vai pagar no cartão?</span>
+					<input name="pgmt" type="checkbox"/>
+				</label>
+				<label>
+					<span>Valor: R$</span>
+					<input name="valor" type="number" min="{{p.gasto}}" max="10000" step="0.05" placeholder="{{p.gasto}}" value="{{p.gasto}}" pattern="([\d]*.\d\d)" title="Insira um valor tendo o gasto como minimo. Siga o padrão para dinheiro: 00.00" required/>
+				</label>
+			</li>
+		{% endfor %}
+		</ul>
+		<input type="submit" value="OK" />
+	</form>
+	<div>
+		<p>Valor da Conta: R${{total}}</p>
+		<p>{{div}}</p>
+	</div>
+	<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/app-pgmt.js' %}"></script>
 </body>
 </html>

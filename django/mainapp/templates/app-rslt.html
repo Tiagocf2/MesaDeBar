@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App - Resultados</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+</head>
+<body bgcolor="white">
+	<h1>Resultado</h1>
+	<p>O total a pagar é <span>R${{total}}</span></p>
+	<p>O total a receber de troco é <span>R${{troco}}</span></p>
+	{% if div == 2 %}
+		{% for g in grupos %}
+			<fieldset>
+				<legend>{{g.nome}}</legend>
+				<p>Valor:&nbsp;<span>R${{g.valor}}</span></p>
+				{% for i in g.pessoas %}
+					{% for p in pessoas %}
+						{% if i == p.id %}
+							<span>{{p.nome}}&nbsp;</span>
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</fieldset>
+		{% endfor %}
+	{% endif %}
+	<ul>
+	{% for p in pessoas %}
+		<li>
+			<p><span>{{p.nome}}</span> deverá pagar <span>R${{p.gasto}}</span> e receber <span>R${{p.troco}}</span> de troco.</p>
+		</li>
+	{% endfor %}
+	</ul>
+	<p>A conta foi dividida&nbsp;
+		{% if div == 0 %}
+			normalmente.
+		{% elif div == 1 %}
+			igualmente.
+		{% elif div == 2 %}
+			parcialmente.
+		{% endif %}
+	</p>
+	<p>Obrigado por usar nosso aplicativo :)</p>
+	<a href="{% url 'app' %}">Calcular novamente</a>
+</body>
+</html>

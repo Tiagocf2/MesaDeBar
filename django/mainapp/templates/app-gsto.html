@@ -4,11 +4,6 @@
 <head>
 	<title>App - Definir Gastos</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
-	<style>
-		.hide{
-			visibility: hidden;
-		}
-	</style>
 </head>
 <body bgcolor="white">
 	<h1> 
@@ -27,25 +22,51 @@
 		{% csrf_token %}
 		<label>
 			<span>Tem Gorjeta?</span>
-			<input name="temGorjeta" id="gorjeta" type="checkbox" checked/>
+			<input name="temGorjeta" id="temGorjeta" type="checkbox" checked/>
 		</label>
 		<label>
 			<input name="gorjeta" type="number" min="1" max="100" step="any" value='10'placeholder="10"/>
 			<span>%</span>
 		</label>
-		<ul>
-			{% for p in pessoas %}
-				<li>
-					<span>{{p.nome}}</span>
-					<label>
-						R$
-						<input name="gasto" type="number" min="0" max="10000" step="0.05" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" required/>
-					</label>
-				</li>
-			{% endfor %}
-		</ul>
+		{% if div == 0 %} <!-- DIVISAO NORMAL -->
+			<p>Quanto cada um gastou?</p>
+			<ul>
+				{% for p in pessoas %}
+					<li>
+						<span>{{p.nome}}</span>
+						<label>
+							R$
+							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+						</label>
+					</li>
+				{% endfor %}
+			</ul>
+		{% elif div == 1 %} <!-- DIVISAO IGUAL -->
+			<p>Quanto foi o valor da conta?</p>
+			<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+		{% elif div == 2 %} <!-- DIVISAO PARCIAL-->
+			<p>Quanto cada um gastou individualmente?</p>
+			<ul>
+				{% for p in pessoas %}
+					<li>
+						<span>{{p.nome}}</span>
+						<label>
+							R$
+							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+						</label>
+					</li>
+				{% endfor %}
+			</ul>
+			<div id="group-section">
+				<button id="add-grupo" type="button">Adicionar novo grupo</button>
+			</div>
+		{% endif %}
 		<input type="submit" value="OK"/>
 	</form>
+	<script type="text/javascript">
+		var pessoas = [{% for p in pessoas %}{"id":"{{p.id}}","nome":"{{p.nome}}"},{% endfor %}];
+	</script>
+	<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/app-gsto.js' %}"></script>
 </body>
 </html>
