@@ -4,12 +4,48 @@
 <head>
 	<title>App - Definir Gastos</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+	<style>
+		.hide{
+			visibility: hidden;
+		}
+	</style>
 </head>
 <body bgcolor="white">
-	<h1>Divisão {{div}}</h1>
-	{% for p in pessoas %}
-		<p>Nome: {{p.nome}}</p>
-	{% endfor %}
+	<h1> 
+		{% if div == 0 %}
+			Divisão Normal
+		{% elif div == 1 %}
+			Divisão Igual
+		{% elif div == 2 %}
+			Divisão Parcial
+		{% else %}
+			Estranho, isso nao deveria acontecer...
+		{% endif %}
+	</h1>
+	<span id="msg" class="error"></span><br>
+	<form id="form" method="POST" action="{% url 'app-pgmt'%}">
+		{% csrf_token %}
+		<label>
+			<span>Tem Gorjeta?</span>
+			<input name="temGorjeta" id="gorjeta" type="checkbox" checked/>
+		</label>
+		<label>
+			<input name="gorjeta" type="number" min="1" max="100" step="any" value='10'placeholder="10"/>
+			<span>%</span>
+		</label>
+		<ul>
+			{% for p in pessoas %}
+				<li>
+					<span>{{p.nome}}</span>
+					<label>
+						R$
+						<input name="gasto" type="number" min="0" max="10000" step="0.05" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" required/>
+					</label>
+				</li>
+			{% endfor %}
+		</ul>
+		<input type="submit" value="OK"/>
+	</form>
 	<script type="text/javascript" src="{% static 'js/app-gsto.js' %}"></script>
 </body>
 </html>

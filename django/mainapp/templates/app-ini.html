@@ -6,7 +6,7 @@
 </head>
 <body bgcolor="white">
 	<h1>Quem vai dividir a conta?</h1>
-	<span id="msg"></span>
+	<span id="msg" class="error"></span>
 	<form id="form" method='POST' action="{% url 'app-gsto' %}">
 		{% csrf_token %}
 		<p>Adicionar pessoa:</p>

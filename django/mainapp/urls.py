@@ -7,4 +7,5 @@ urlpatterns = [
 	path('app/', views.app, name="app"),
 	path('app/error', views.app_error, name="app-error"),
 	path('app/gastos', views.app_gsto, name="app-gsto"),
+	path('app/pagamento', views.app_pgmt, name="app-pgmt"),
 ]
