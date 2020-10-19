@@ -46,7 +46,8 @@ function add(self){
 	data.setAttribute("value", value);
 	view.innerHTML = value;
 	btn.setAttribute("type", "button");
-	btn.innerHTML = "-";
+	btn.classList.add("classe");
+	btn.innerHTML = "Remover";
 	btn.addEventListener("click", function(){
 		remove(view, btn, data);
 	});
