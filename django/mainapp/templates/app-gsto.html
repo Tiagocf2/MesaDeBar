@@ -61,7 +61,7 @@
 				<button id="add-grupo" type="button">Adicionar novo grupo</button>
 			</div>
 		{% endif %}
-		<input type="submit" value="OK"/>
+		<input type="submit" class="botao" value="OK"/>
 	</form>
 	<script type="text/javascript">
 		var pessoas = [{% for p in pessoas %}{"id":"{{p.id}}","nome":"{{p.nome}}"},{% endfor %}];
