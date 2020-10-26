@@ -36,14 +36,14 @@
 						<span>{{p.nome}}</span>
 						<label>
 							R$
-							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*[,]\d\d)" placeholder="0,00" title="Insira um valor seguindo o padrão para dinheiro: 00,00" required/>
 						</label>
 					</li>
 				{% endfor %}
 			</ul>
 		{% elif div == 1 %} <!-- DIVISAO IGUAL -->
 			<p>Quanto foi o valor da conta?</p>
-			<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+			<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*[,]\d\d)" placeholder="0,00" title="Insira um valor seguindo o padrão para dinheiro: 00,00" required autocomplete="off" />
 		{% elif div == 2 %} <!-- DIVISAO PARCIAL-->
 			<p>Quanto cada um gastou individualmente?</p>
 			<ul>
@@ -52,7 +52,7 @@
 						<span>{{p.nome}}</span>
 						<label>
 							R$
-							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*.\d\d)" title="##.##" placeholder="0.00" title="Insira um valor seguindo o padrão para dinheiro: 00.00" required/>
+							<input name="gasto" type="number" min="0" max="10000" step="any" pattern="([\d]*[,]\d\d)" placeholder="0,00" title="Insira um valor seguindo o padrão para dinheiro: 00,00" required autocomplete="off"/>
 						</label>
 					</li>
 				{% endfor %}

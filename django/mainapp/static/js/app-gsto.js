@@ -19,14 +19,6 @@ function addInputListeners(){
 	}
 }
 
-function formatInput(self){
-	//TODO formatar um numero '1' para '1.00'
-	var new_value = parseFloat(self.value);
-	if(new_value != NaN){
-		self.value = new_value.toFixed(2);
-	}
-}
-
 function toggleGorjeta(){
 	if(isGorjetaEnabled){
 		form.gorjeta.value = form.gorjeta.labels[0].placeholder;
@@ -53,6 +45,8 @@ function addGroup(){
 	inputName.setAttribute("type","text");
 	inputName.setAttribute("name","grupo-nome");
 	inputName.setAttribute("required","required");
+	inputName.setAttribute("autocomplete","off");
+	inputName.setAttribute("placeholder","Qual item será dividido?");
 	labelName.innerHTML = "Nome:&nbsp;";
 	labelName.appendChild(inputName);
 	inputValor.setAttribute("type","number");
@@ -61,6 +55,10 @@ function addGroup(){
 	inputValor.setAttribute("max", 10000);
 	inputValor.setAttribute("step", 0.05);
 	inputValor.setAttribute("required","required");
+	inputValor.setAttribute("autocomplete","off");
+	inputValor.setAttribute("pattern","([\d]*[,]\d\d)");
+	inputValor.setAttribute("title","Insira um valor seguindo o padrão para dinheiro: 00,00");
+	inputValor.setAttribute("placeholder","0,05");
 	inputValor.addEventListener("focusout", function(){ formatInput(this); });
 	labelValor.innerHTML = "Valor:&nbsp;";
 	labelValor.appendChild(inputValor);
@@ -101,7 +99,6 @@ function addGroup(){
 
 function addGroupMember(self, group){
 	var parent = self.parentElement;
-	//var data = parent.children.namedItem("grupo-pessoa");
 	var select = parent.children.namedItem("select");
 	var option = select.options[select.selectedIndex];
 	if(!option){
@@ -115,9 +112,12 @@ function addGroupMember(self, group){
 	data.setAttribute("type", "hidden");
 	data.setAttribute("value", option.value);
 	
-	for(g of groups){
-		if(g["group"] == group){
-			g["members"].push(data);
+	var gIndex = -1;
+	var mIndex = -1;
+	for(var i = 0; i < groups.length; i++){
+		if(groups[i]["group"] == group){
+			mIndex = groups[i]["members"].push(data);
+			gIndex = i;
 		}
 	}
 
@@ -125,7 +125,7 @@ function addGroupMember(self, group){
 	btn.setAttribute("type", "button");
 	btn.innerHTML = "-";
 	btn.addEventListener("click", function(){
-		removeGroupMember(view, btn, option);
+		removeGroupMember(view, btn, option, gIndex, mIndex - 1);
 	});
 
 	option.disabled = true;
@@ -135,23 +135,29 @@ function addGroupMember(self, group){
 	parent.children.namedItem("lista").appendChild(btn);
 }
 
-function removeGroupMember(view, btn, option){
+function removeGroupMember(view, btn, option, gIndex, mIndex){
 	view.remove();
 	btn.remove();
-	var index = data.indexOf(option.value);
-	if(index > -1){
-		data.splice(index, 1);
+	if(gIndex > -1 || mIndex > -1){
+		groups[gIndex]["members"].splice(mIndex, 1);
+	} else {
+		return false;
 	}
 	option.disabled = false;
 	option.selected = true;
 }
 
 function removeGroup(container){
-	var index = groups.indexOf(container);
-	if (index > -1) {
-	  groups.splice(index, 1);
+	var index = -1;
+	for(var i = 0; i < groups.length; i++){
+		if(groups[i]["group"] == container){
+			index = i;
+		}
 	}
-	container.remove()
+	if (index > -1) {
+		container.remove();
+	 	groups.splice(index, 1);
+	}
 }
 
 function isValidForm(){

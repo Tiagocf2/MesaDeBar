@@ -2,6 +2,12 @@ form.onsubmit = isValidForm;
 var nomes = [];
 
 checkValidType();
+addListeners();
+
+function addListeners(){
+	var inp = document.getElementById("input");
+	inp.addEventListener("focus",function(){clearValue(inp);})
+}
 
 function add(self){
 	var parent = self.parentNode;
@@ -97,4 +103,8 @@ function checkValidType(){
 		form.divisao[1].disabled = false;
 		form.divisao[2].disabled = false;
 	}
+}
+
+function clearValue(self){
+	self.value = '';
 }

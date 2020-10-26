@@ -13,7 +13,7 @@
 	<form method='POST' id="form" action="{% url 'app-gsto' %}">
 		{% csrf_token %}
 		<p>Adicionar pessoas:</p>
-		<input type="text" id="input" name="add_nome"/>
+		<input type="text" id="input" name="add_nome" autocomplete="off" placeholder="Insira um nome" />
 		<button type="button" class="botao" onclick="add(this)">Adicionar</button>
 		<ul id="lista" name="lista"></ul>
 

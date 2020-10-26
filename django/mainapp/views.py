@@ -18,7 +18,7 @@ gor_perc = 0     #percentual de gorjeta
 pessoas = []     #vetor para armazenar as pessoas
 id_atual = 0     #armazena o proximo id livre
 pessoa_model = { #modelo para uma pessoa
-	"id":0,
+	"id":'0',
 	"nome":"",
 	"pgmt":PGMT_DINHEIRO,
 	"gasto":0,
@@ -80,8 +80,10 @@ def app_gsto(request):
 	return HttpResponse(template.render(context, request))
 
 def app_pgmt(request):
+	'''Processa os valores dos gastos e a gorjeta'''
 	global gor_perc, valor_total, pessoas, tipo_divisao, grupos, grupo_model
 	gor_perc = 0
+	grupos = []
 
 	if("gorjeta" not in request.POST or "gasto" not in request.POST):
 		return throw_error("Por favor não mude o nome da chave ;)")
@@ -94,7 +96,7 @@ def app_pgmt(request):
 	if (tipo_divisao == DIVISAO_NORMAL):
 		gastos = request.POST.getlist("gasto")
 		for i in range(0, len(pessoas)):
-			gastos[i] = float(gastos[i])
+			gastos[i] = round(float(gastos[i]),2)
 			pessoas[i]["gasto"] = gastos[i]
 			valor_total += gastos[i]
 
@@ -108,7 +110,7 @@ def app_pgmt(request):
 	elif (tipo_divisao == DIVISAO_PARCIAL):
 		gastos = request.POST.getlist("gasto")
 		for i in range(0, len(pessoas)):
-			gastos[i] = float(gastos[i])
+			gastos[i] = round(float(gastos[i]),2)
 			pessoas[i]["gasto"] = gastos[i]
 			valor_total += gastos[i]
 		g_nomes = request.POST.getlist("grupo-nome")
@@ -131,9 +133,9 @@ def app_pgmt(request):
 
 	if(temGorjeta):
 		gor_perc = float(request.POST["gorjeta"])/100
-		valor_total += valor_total * gor_perc
+		valor_total += round(valor_total * gor_perc,2)
 		for p in pessoas:
-			p["gasto"] += p["gasto"] * gor_perc
+			p["gasto"] += round(p["gasto"] * gor_perc,2)
 
 	template = loader.get_template('app-pgmt.html')
 	context = {
@@ -145,6 +147,7 @@ def app_pgmt(request):
 	return HttpResponse(template.render(context, request))
 
 def app_rslt(request):
+	'''Processa os valores de pagamento e troco'''
 	global gor_perc, valor_total, pessoas, tipo_divisao, troco_total, grupos
 	troco_total = 0
 
@@ -157,11 +160,11 @@ def app_rslt(request):
 	for i in range(0, len(pessoas)):
 		if(pgmts[i] == "on"):
 			pessoas[i]["pgmt"] = PGMT_CARTAO
-		elif(pgmts[i] == "on"):
+		elif(pgmts[i] == "off"):
 			pessoas[i]["pgmt"] = PGMT_DINHEIRO
 
 		if(pessoas[i]["pgmt"] == PGMT_DINHEIRO):
-			pessoas[i]["valor"] = float(valores[i])
+			pessoas[i]["valor"] = round(float(valores[i]),2)
 			troco = pessoas[i]["valor"] - pessoas[i]["gasto"]
 			pessoas[i]["troco"] = troco
 			troco_total += troco
@@ -189,7 +192,7 @@ def adicionar_pessoa(nome):
 	global id_atual
 	p = pessoa_model.copy()
 	p["nome"] = nome
-	p["id"] = id_atual
+	p["id"] = str(id_atual)
 	pessoas.append(p)
 	id_atual += 1
 	return p

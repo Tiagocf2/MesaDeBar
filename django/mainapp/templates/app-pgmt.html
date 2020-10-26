@@ -14,14 +14,14 @@
 		{% for p in pessoas %}
 			<li>
 				<span>{{p.nome}}</span>
-				<span>R${{p.gasto}}</span>
+				<span>R${{p.gasto|floatformat}}</span>
 				<label>
 					<span>Vai pagar no cartão?</span>
 					<input name="pgmt" type="checkbox"/>
 				</label>
 				<label>
 					<span>Valor: R$</span>
-					<input name="valor" type="number" min="{{p.gasto}}" max="10000" step="0.05" placeholder="{{p.gasto}}" value="{{p.gasto}}" pattern="([\d]*.\d\d)" title="Insira um valor tendo o gasto como minimo. Siga o padrão para dinheiro: 00.00" required/>
+					<input name="valor" type="number" min="{{p.gasto}}" max="10000" step="0.05" placeholder="{{p.gasto}}" value="{{p.gasto}}" pattern="([\d]*[,]\d\d)" title="Insira um valor tendo o gasto como minimo. Siga o padrão para dinheiro: 00,00" required autocomplete="off"/>
 				</label>
 			</li>
 		{% endfor %}
