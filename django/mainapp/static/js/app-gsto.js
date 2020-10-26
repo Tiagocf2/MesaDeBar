@@ -53,7 +53,7 @@ function addGroup(){
 	inputValor.setAttribute("name","grupo-valor");
 	inputValor.setAttribute("min", 0.05);
 	inputValor.setAttribute("max", 10000);
-	inputValor.setAttribute("step", 0.05);
+	inputValor.setAttribute("step", "any");
 	inputValor.setAttribute("required","required");
 	inputValor.setAttribute("autocomplete","off");
 	inputValor.setAttribute("pattern","([\d]*[,]\d\d)");

@@ -128,7 +128,7 @@ def app_pgmt(request):
 			valor_indv = round(valor/len(membros),2)
 			for _id in membros:
 				for p in pessoas:
-					if(p["id"] == int(_id)):
+					if(p["id"] == _id):
 						p["gasto"] += valor_indv
 
 	if(temGorjeta):
